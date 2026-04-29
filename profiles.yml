@@ -1,0 +1,11 @@
+airbnb:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project:         # Replace with your Google Cloud project ID
+      dataset:          # Replace with default schema name (where the files will end up in bigquery)
+      threads: 4
+      timeout_seconds: 300
+      location: EU

@@ -1,0 +1,22 @@
+name: 'stockholm_airbnb'
+version: '1.0.0'
+config-version: 2
+
+profile: 'stockholm_airbnb'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  stockholm_airbnb:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
