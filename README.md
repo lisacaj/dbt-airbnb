@@ -2,7 +2,7 @@
 
 ## Before the day
 
-Follow the **pre-setup guide** shared by your instructor to get your environment ready. You should complete this **before** the session.
+Follow the **pre-setup guide** to get your environment ready. You should complete this **before** the session.
 
 By the end of the setup guide your environment will be fully configured and `dbt debug` will return all green.
 
