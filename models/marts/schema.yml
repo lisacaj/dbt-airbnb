@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: dim_listings
+    description: Listing dimension table. One row per listing with all attributes.
+
+  - name: dim_hosts
+    description: Host dimension table. One row per host with aggregated metrics from their listings.
+
+  - name: fct_reviews
+    description: Review fact table. One row per review with listing details denormalized.

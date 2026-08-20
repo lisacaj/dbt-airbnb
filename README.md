@@ -1,45 +1,53 @@
-# AIRBNB — DBT Starter Project
+# Stockholm Airbnb — dbt Guided Project
 
-## Before the day
+A hands-on dbt learning project where students build a data pipeline from raw Airbnb data to clean analytics-ready tables.
 
-Follow the **pre-setup guide** to get your environment ready. You should complete this **before** the session.
+## The Dataset
 
-By the end of the setup guide your environment will be fully configured and `dbt debug` will return all green.
+Stockholm Airbnb data with two raw tables:
 
-## What's in this repo
+| Table | Rows | Description |
+|---|---|---|
+| `raw_listings` | 8,517 | Airbnb listings with host info, pricing, review scores, availability |
+| `raw_reviews` | 161,036 | Guest reviews with reviewer info and comments |
 
-```
-airbnb/
-├── dbt_project.yml          # Project configuration
-├── profiles.yml.example     # Template — copy to ~/.dbt/profiles.yml
-├── seeds/                   # Raw data CSV files
-│   ├── raw_listings.csv
-│   └── raw_reviews.csv
-├── models/
-│   ├── sources.yml          # Source definitions
-│   ├── staging/             # You will build your staging models here
-│   └── marts/               # You will build your mart models here
-├── tests/                   # You will add tests here
-└── macros/                  # Available for macros if needed
-```
+## Session Goals
 
-## The dataset
+Students will build three **staging models** that transform the raw data:
 
-The data is AIRBNB data for listings in Stockholm. The raw data contains two tables:
+1. **`src_listings`** — Clean listing data (rename columns, convert price from text to number, convert boolean t/f to TRUE/FALSE)
+2. **`src_hosts`** — Unique hosts deduplicated from listings (introduce `QUALIFY ROW_NUMBER()` pattern)
+3. **`src_reviews`** — Clean review data (rename columns, keep as-is otherwise)
 
-| Table | Description |
-|---|---|
-| `raw_customers` | One row per listing |
-| `raw_review` | One row per review |
+These models are the foundation for any downstream analytics tables or dashboards.
 
-## Useful commands
+## Quick Start (After Setup)
 
 ```bash
-dbt debug          # Test your connection
-dbt seed           # Load the CSV files into BigQuery
-dbt run            # Run all models
-dbt test           # Run all tests
-dbt build          # Seed + run + test in one command
-dbt docs generate  # Generate documentation
-dbt docs serve     # View documentation in browser
+# Verify connection to BigQuery
+dbt debug
+
+# Load raw CSV data into BigQuery
+dbt seed
+
+# Run all staging models
+dbt run --select staging
+
+# View the documentation (optional)
+dbt docs generate
+dbt docs serve
+```
+
+## Useful dbt Commands
+
+```bash
+dbt debug                          # Test your connection to BigQuery
+dbt seed                           # Load the CSV files into BigQuery as raw tables
+dbt run                            # Run all models
+dbt run --select staging           # Run only staging models
+dbt run --select src_listings      # Run a specific model
+dbt test                           # Run all tests
+dbt build                          # Seed + run + test in one command
+dbt docs generate                  # Generate documentation
+dbt docs serve                     # View documentation in browser (http://localhost:8000)
 ```

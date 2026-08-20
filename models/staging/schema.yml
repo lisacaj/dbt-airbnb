@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_listings
+    description: Cleaned and renamed listing data from raw_listings. One row per listing.
+    columns:
+      - name: listing_id
+        description: Unique identifier for each listing (primary key).
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_reviews
+    description: Cleaned and renamed review data from raw_reviews. One row per review.
+    columns:
+      - name: review_id
+        description: Unique identifier for each review (primary key).
+        tests:
+          - unique
+          - not_null
+      - name: listing_id
+        description: Foreign key to listings.
+        tests:
+          - not_null

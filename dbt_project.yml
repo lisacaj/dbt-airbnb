@@ -1,22 +1,30 @@
+# dbt project configuration for Stockholm Airbnb guided project
 name: 'stockholm_airbnb'
 version: '1.0.0'
 config-version: 2
 
+# Profile must match the profile name in ~/.dbt/profiles.yml
 profile: 'stockholm_airbnb'
 
+# Directory paths
 model-paths: ["models"]
 seed-paths: ["seeds"]
 test-paths: ["tests"]
 macro-paths: ["macros"]
 
+# Build artifacts directory
 target-path: "target"
 clean-targets:
   - "target"
   - "dbt_packages"
 
+# Model materialization rules
 models:
   stockholm_airbnb:
+    # Staging models: lightweight views (not materialized)
     staging:
       +materialized: view
+
+    # Mart models: materialized tables (stored in BigQuery)
     marts:
       +materialized: table
